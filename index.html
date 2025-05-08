@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CWP</title> <!-- CWP stands for ChattyWebsite Proxy -->
+    <link href="https://fonts.googleapis.com/css2?family=Varela+Round&family=Raleway:wght@100..900&display=swap" rel="stylesheet">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            font-family: 'Varela Round', Arial, sans-serif;
+            background-image: url('https://64.media.tumblr.com/d60fa89a6c6ef6b51790a079d7204540/f145147b69889cf3-a3/s640x960/1d7480b51aa3c7cfc46d85641dfd9f759eeadd95.gif');
+            background-color: #005;
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+            color: #fff;
+            text-align: center;
+        }
+
+        #main-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center;
+        }
+
+        #url-bar {
+            font-family: 'Raleway', Arial, sans-serif;
+            font-size: 15px;
+            padding: 15px;
+            width: 50%;
+            border-radius: 6px;
+            border: 0;
+            text-align: center;
+            background-color: #003d80;
+            color: #ffffff;
+            transition: all 0.3s ease-in-out;
+            border: 2px solid #121c7b;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+        }
+
+        #url-bar::placeholder {
+            color: #ffffff;
+            opacity: 1;
+        }
+
+        #url-bar:hover {
+            background-color: #0056b3;
+            color: #ffffff;
+            border: 2px solid #4169E1;
+            box-shadow: 0 0 15px rgba(65, 105, 225, 0.8);
+        }
+
+        #url-bar:focus {
+            cursor: text;
+            width: 55%;
+            border: 2px solid #4196e1;
+            box-shadow: 0 0 20px rgba(65, 105, 225, 1);
+            background-color: #002b5a;
+            color: #ffffff;
+            outline: none;
+        }
+
+        #open-url-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-family: 'Raleway', Arial, sans-serif;
+            background-color: #00008B;
+            color: #00FFFF;
+            border: 2px solid #00ff;
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+        }
+
+        #open-url-btn:hover {
+            background-color: #4169E1;
+            color: #00FFFF;
+            box-shadow: 0 0 15px rgb(17, 27, 215), 0 0 30px rgba(255, 255, 255, 0.8);
+        }
+
+        #open-url-btn:active {
+            background-color: #23278d;
+            color: #549ea0;
+            border: 2px solid #121c7b;
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 10px;
+        }
+
+        h3 {
+            font-size: 18px;
+            font-weight: 400;
+            color: #ffffff;
+            margin-bottom: 20px;
+        }
+
+        #embedded-site {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="main-container">
+        <h1>ChattyWebsite Proxy</h1>
+        <h3>This does not work with every site, only some links work.</h3>
+        <input type="text" id="url-bar" placeholder="Enter a URL" autocomplete="off">
+        <button id="open-url-btn">Open URL</button>
+    </div>
+    <object id="embedded-site" style="display: none;"></object>
+    <script>
+        const openUrlBtn = document.getElementById('open-url-btn');
+        const urlBar = document.getElementById('url-bar');
+        const mainContainer = document.getElementById('main-container');
+        const embeddedSite = document.getElementById('embedded-site');
+
+        openUrlBtn.addEventListener('click', () => {
+            let url = urlBar.value.trim();
+            if (!url.startsWith('http://') && !url.startsWith('https://')) {
+                url = 'https://' + url;
+            }
+            mainContainer.style.display = 'none';
+            embeddedSite.style.display = 'block';
+            embeddedSite.setAttribute('data', url);
+        });
+    </script>
+</body>
+</html>

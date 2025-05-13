@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CWP</title> <!-- CWP stands for ChattyWebsite Proxy -->
+    <title>ChattyWebsite</title>
     <link href="https://fonts.googleapis.com/css2?family=Varela+Round&family=Raleway:wght@100..900&display=swap" rel="stylesheet">
     <style>
         body, html {
@@ -19,6 +19,8 @@
             background-position: center;
             color: #fff;
             text-align: center;
+            cursor: default;
+            user-select: none;
         }
 
         #main-container {
@@ -33,7 +35,6 @@
         #url-bar {
             font-family: 'Raleway', Arial, sans-serif;
             font-size: 15px;
-            font-weight: bold;
             padding: 15px;
             width: 50%;
             border-radius: 6px;
@@ -44,12 +45,12 @@
             transition: all 0.3s ease-in-out;
             border: 2px solid #121c7b;
             box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+            margin-bottom: 15px;
         }
 
         #url-bar::placeholder {
             color: #ffffff;
             opacity: 1;
-            font-weight: bold;
         }
 
         #url-bar:hover {
@@ -69,38 +70,17 @@
             outline: none;
         }
 
-        #open-url-btn {
-            margin-top: 20px;
-            padding: 10px 20px;
-            font-size: 16px;
-            font-family: 'Raleway', Arial, sans-serif;
-            background-color: #00008B;
-            color: #00FFFF;
-            border: 2px solid #00ff;
-            border-radius: 12px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
-        }
-
-        #open-url-btn:hover {
-            background-color: #4169E1;
-            color: #00FFFF;
-            box-shadow: 0 0 15px rgb(17, 27, 215), 0 0 30px rgba(255, 255, 255, 0.8);
-        }
-
-        #open-url-btn:active {
-            background-color: #23278d;
-            color: #549ea0;
-            border: 2px solid #121c7b;
-        }
-
         h1 {
             font-size: 24px;
             font-weight: 700;
             color: #ffffff;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
+            border-radius: 12px;
+            padding: 10px;
+            border: 2px solid #4196e1;
+            background-color: #0056b3;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 0 15px rgba(65, 105, 225, 0.8);
         }
 
         h3 {
@@ -108,6 +88,17 @@
             font-weight: 400;
             color: #ffffff;
             margin-bottom: 20px;
+        }
+
+        #random-message {
+            font-size: 16px;
+            font-weight: 400;
+            color: #f0f0f0;
+            margin-top: 10px;
+            padding: 10px;
+            background-color: rgba(0, 0, 0, 0.4);
+            border-radius: 10px;
+            width: 50%;
         }
 
         #embedded-site {
@@ -122,26 +113,74 @@
 </head>
 <body>
     <div id="main-container">
-        <h1>ChattyWebsite Proxy</h1>
+        <h1>ChattyWebsite</h1>
         <h3>This does not work with every site, only some links work.</h3>
         <input type="text" id="url-bar" placeholder="Enter a URL" autocomplete="off">
-        <button id="open-url-btn">Open URL</button>
+        <div id="random-message"></div>
     </div>
     <object id="embedded-site" style="display: none;"></object>
     <script>
-        const openUrlBtn = document.getElementById('open-url-btn');
+      // guys why not add random messages to a site where no one reads them?
+        const randomMessages = [
+            "Welcome to ChattyWebsite Proxy",
+            "Never try going to example.com",
+            "Teacher is getting past, spawn more towers",
+            "I Pirate and You Should Too",
+            "I Hate People That Type Like This.",
+            "Enter a URL | Go to Settings to enter a URL",
+            "password123 is a bad password!",
+            "links = url",
+            "Hi, Chattyice here!",
+            "Heh heh heh.",
+            "WOAH WOAH WOAH WOAH WOAH!",
+            "No being gay",
+            ":D",
+            "🐷",
+            "What is the best website?",
+            "loading can take up to 20 seconds 😬",
+            "It's a user error, I swear!",
+            "nope, i'm cooked",
+            "Recoded skid :D",
+            "Made by Chattyice",
+            "Check your windows",
+            "50% of a proxy!",
+            "PANIC KEY! PANIC KEY! WHY IS IT NOT WORKING?",
+            "Am i cooking?",
+            "Waiter waiter! One, um.. Uh, can I order... How about a...",
+            "This only works on Chrome and Android. What the hell",
+            "google is a dumbass",
+            "auto https:// for you lazy kids",
+            "Learned to spell",
+            "Found out about grammar",
+            "man i am hungry",
+            "mom can we get a good proxy? we have a good proxy at home honey. the good proxy at home:",
+            "Now realized what CSS was",
+            "outline: none;",
+            "What is a proxy?",
+        ];
+
+        function displayRandomMessage() {
+            const randomMessageElement = document.getElementById('random-message');
+            const randomIndex = Math.floor(Math.random() * randomMessages.length);
+            randomMessageElement.textContent = randomMessages[randomIndex];
+        }
+
+        displayRandomMessage();
+
         const urlBar = document.getElementById('url-bar');
         const mainContainer = document.getElementById('main-container');
         const embeddedSite = document.getElementById('embedded-site');
 
-        openUrlBtn.addEventListener('click', () => {
-            let url = urlBar.value.trim();
-            if (!url.startsWith('http://') && !url.startsWith('https://')) {
-                url = 'https://' + url;
+        urlBar.addEventListener('keypress', (event) => {
+            if (event.key === 'Enter') {
+                let url = urlBar.value.trim();
+                if (!url.startsWith('http://') && !url.startsWith('https://')) {
+                    url = 'https://' + url;
+                }
+                mainContainer.style.display = 'none';
+                embeddedSite.style.display = 'block';
+                embeddedSite.setAttribute('data', url);
             }
-            mainContainer.style.display = 'none';
-            embeddedSite.style.display = 'block';
-            embeddedSite.setAttribute('data', url);
         });
     </script>
 </body>
